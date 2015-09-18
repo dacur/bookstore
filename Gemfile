@@ -9,6 +9,10 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'stripe'
+gem 'activeadmin'
+gem "meta_search", '>= 1.1.0.pre'
+gem 'devise'
 
 group :development, :test do
   gem 'pry-byebug'
