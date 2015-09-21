@@ -1,14 +1,13 @@
 Given(/^I do not have an account on the site$/) do
-  @user = User.new
+  @user = build(:user)
 end
 
 When(/^I visit the site root path$/) do
   visit("/")
-  expect(page).to have_content(@password)
 end
 
 Then(/^I am presented with a login page$/) do
-  expect(page).to have_content(@password)
+  expect(page).to have_content("Log in")
 end
 
 When(/^I click "(.*?)"$/) do |target|
@@ -35,7 +34,7 @@ end
 
 Then(/^I am sent a confirmation email$/) do
   email = ActionMailer::Base.deliveries.first
-  expect(email.from).to eq(["david.curtis@smashingboxes.com"])
+  expect(email.from).to eq(["no-reply@smashingboxes.com"])
   expect(email.to).to eq(["test@example.com"])
   expect(email.body).to have_content("confirm your account")
 end
@@ -49,8 +48,8 @@ Then(/^my email address becomes confirmed$/) do
   expect(User.last.confirmed?).to be_truthy
 end
 
-Then(/^I should see "(.*?)"$/) do |arg1|
-  expect(page).to have_content("Your email address has been successfully confirmed")
+Then(/^I should see "(.*?)"$/) do |text|
+  expect(page).to have_content(text)
 end
 
 
