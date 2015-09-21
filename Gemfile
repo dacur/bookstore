@@ -23,6 +23,7 @@ group :development, :test do
   gem 'launchy'
   gem 'capybara-webkit'
   gem 'faker'
+  gem 'email_spec'
 end
 
 gem 'capybara-screenshot', :group => :test

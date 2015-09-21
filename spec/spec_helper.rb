@@ -5,6 +5,9 @@ require 'rspec/rails'
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
+
   config.use_transactional_fixtures = false # Using DatabaseCleaner instead
 
   # If true, the base class of anonymous controllers will be inferred
