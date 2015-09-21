@@ -63,14 +63,10 @@ Then(/^I am notified that my password confirmation does not match$/) do
   expect(page).to have_content("Password confirmation doesn't match Password")
 end
 
-When(/^I enter "(.*?)" as my email address$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter a password with correct password confirmation$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I enter "(.*?)" as my email address$/) do |text|
+  fill_in "Email", :with => text
 end
 
 Then(/^I am notified that my email address is invalid\.$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content("Email is invalid")
 end
