@@ -21,4 +21,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
+  gem 'capybara-webkit'
+  gem 'faker'
 end
+
+gem 'capybara-screenshot', :group => :test
