@@ -21,7 +21,7 @@ Feature: User Account Creation
     When I click "Sign up"
     And I enter my email address
     And I enter a password with incorrect confirmation
-    And I click submit
+    And I click the "Sign up" button
     Then I am notified that my password confirmation does not match
 
   Scenario: Invalid Email Format
