@@ -40,19 +40,14 @@ Then(/^I am sent a confirmation email$/) do
   expect(email.body).to have_content("confirm your account")
 end
 
-# When(/^I visit the link in that email$/) do
-#   email = ActionMailer::Base.deliveries.first
-#   click_email_link_matching /confirm/
-#   expect(page).to have_content("Your email address has been successfully confirmed")
-# end
-
 When(/^I follow the link "(.*?)" in the email$/) do |link|
   open_email("test@example.com")
   visit_in_email(link)
 end
-# When(/^I open the email with subject "(.*?)"$/) do |subject|
-#   open_email(with_subject: subject)
-# end
+
+Then(/^my email address becomes confirmed$/) do
+  expect(User.last.confirmed?).to be_truthy
+end
 
 Then(/^I should see "(.*?)"$/) do |arg1|
   expect(page).to have_content("Your email address has been successfully confirmed")
