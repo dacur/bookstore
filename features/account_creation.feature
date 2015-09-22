@@ -12,7 +12,6 @@ Feature: User Account Creation
     When I follow the link "Confirm my account" in the email
     Then I should see "Your email address has been successfully confirmed"
     And my email address becomes confirmed
-    #And I am redirected to the book index page
 
   Scenario: Invalid Password
     Given I do not have an account on the site
