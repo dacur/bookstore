@@ -8,8 +8,10 @@ Before do
   visit_in_email("Confirm my account")
 end
 
-Given(/^there are (\d+) books in the database$/) do |arg1|
-  @book = create(:book)
+Given(/^there are (\d+) books in the database$/) do |amount|
+  amount.to_i.times { create(:book) }
+  # @published_first = create(:book, published_date: "2015-09-20")
+  # @published_last = create(:book, published_date: "2015-09-22") 
 end
 
 Given(/^I am logged into the site$/) do
@@ -24,11 +26,13 @@ When(/^I visit the root url$/) do
 end
 
 Then(/^I see a list of books in the database$/) do
-  expect(page).to have_content("Bookstore")
+  expect(page).to have_content(Book.first.title)
 end
 
 Then(/^the books are ordered by published date$/) do
-  pending # express the regexp above with the code you wish you had
+  published_first = create(:book, published_date: "2015-09-20")
+  published_last = create(:book, published_date: "2015-09-24") 
+  expect(Book.last).to eq(published_first)
 end
 
 Then(/^the list of (\d+) books are paginated in pages of (\d+) books per page$/) do |arg1, arg2|
