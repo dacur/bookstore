@@ -6,6 +6,7 @@ Before do
   click_button("Sign up")
   open_email("test@example.com")
   visit_in_email("Confirm my account")
+  @book = build(:book)
 end
 
 Given(/^there are (\d+) books in the database$/) do |amount|
@@ -35,8 +36,8 @@ Then(/^the books are ordered by published date$/) do
   expect(Book.last).to eq(published_first)
 end
 
-Then(/^the list of (\d+) books are paginated in pages of (\d+) books per page$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Then(/^the list of (\d+) books are paginated in pages of (\d+) books per page$/) do |total, per_page|
+  expect(page).to have_content(@book.price_cents, count: 25)
 end
 
 Given(/^some books have been ordered$/) do
