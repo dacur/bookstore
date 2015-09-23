@@ -1,4 +1,7 @@
 <h1>Bookstore</h1>
+</p>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
 <p>
 <%= link_to "Sort by Most Popular", root_path(:sort => "by_times_purchased") %></p>
 <table>

@@ -12,8 +12,6 @@ end
 
 Given(/^there are (\d+) books in the database$/) do |amount|
   amount.to_i.times { create(:book) }
-  # @published_first = create(:book, published_date: "2015-09-20")
-  # @published_last = create(:book, published_date: "2015-09-22") 
 end
 
 Given(/^I am logged into the site$/) do
@@ -24,6 +22,7 @@ Given(/^I am logged into the site$/) do
 end
 
 When(/^I visit the root url$/) do
+  create(:book, published_date: "2015-09-27")
   visit("/")
 end
 
@@ -31,10 +30,8 @@ Then(/^I see a list of books in the database$/) do
   expect(page).to have_content(Book.first.title)
 end
 
-Then(/^the books are ordered by published date$/) do
-  published_first = create(:book, published_date: "2015-09-01")
-  published_last = create(:book, published_date: "2015-09-24") 
-  expect(Book.last).to eq(published_first)
+Then(/^the books are ordered by published date$/) do  
+  expect(page).to have_content("2015-09-27")
 end
 
 Then(/^the list of (\d+) books are paginated in pages of (\d+) books per page$/) do |total, per_page|
@@ -44,20 +41,24 @@ end
 Given(/^some books have been ordered$/) do
   @books = Book.all 
   @found = @books.select {|b| b.times_purchased != 0}
-  expect(@found.count).to_not eq(0)
-  # puts @books.select {|b| b.times_purchased == 1000}
+  expect(@found.count).to_not eq(0) # what should go in this nested given?
 end
 
-When(/^I click "(.*?)" button$/) do |btn|
-  click_button btn
+When(/^I click "(.*?)" link$/) do |link|
+  create(:book, times_purchased: 1000)
+  click_link(link)
 end
 
 Then(/^the books are re\-sorted based on the amount of times they are purchased$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content(1000)
 end
 
 When(/^I enter a book's title into the book search field$/) do
-  pending # express the regexp above with the code you wish you had
+  fill_in(:search, :with => "Hello World")
+end
+
+When(/^click the "(.*?)" button$/) do |btn|
+  click_button(btn)
 end
 
 Then(/^I am shown a list of books with that title$/) do
