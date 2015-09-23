@@ -54,7 +54,8 @@ Then(/^the books are re\-sorted based on the amount of times they are purchased$
 end
 
 When(/^I enter a book's title into the book search field$/) do
-  fill_in(:search, :with => "Hello World")
+  create(:book, title: "Stuff Ian Says")
+  fill_in(:search, :with => "Stuff Ian Says")
 end
 
 When(/^click the "(.*?)" button$/) do |btn|
@@ -62,5 +63,5 @@ When(/^click the "(.*?)" button$/) do |btn|
 end
 
 Then(/^I am shown a list of books with that title$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content("Stuff Ian Says")
 end
