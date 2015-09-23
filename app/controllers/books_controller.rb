@@ -2,6 +2,11 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @books = Book.all.paginate(:page => params[:page], :per_page => 25)
+    if params[:sort] == "by_times_purchased"
+      @books = Book.by_times_purchased.paginate(:page => params[:page], :per_page => 25)
+    else
+      @books = Book.order(published_date: :desc).paginate(:page => params[:page], :per_page => 25)
+    end
   end
+
 end

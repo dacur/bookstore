@@ -12,7 +12,7 @@ Feature: Book index store page
     And some books have been ordered
     And I am logged into the site
     When I visit the root url
-    And I sort by "Most Popular"
+    And I click "Sort by Most Popular" button
     Then the books are re-sorted based on the amount of times they are purchased
 
   Scenario: Book searching

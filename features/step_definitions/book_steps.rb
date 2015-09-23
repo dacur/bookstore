@@ -1,3 +1,4 @@
+# require "pry-byebug"
 Before do
   visit("/users/sign_up")
   fill_in "Email", :with => "test@example.com"
@@ -31,21 +32,24 @@ Then(/^I see a list of books in the database$/) do
 end
 
 Then(/^the books are ordered by published date$/) do
-  published_first = create(:book, published_date: "2015-09-20")
+  published_first = create(:book, published_date: "2015-09-01")
   published_last = create(:book, published_date: "2015-09-24") 
   expect(Book.last).to eq(published_first)
 end
 
 Then(/^the list of (\d+) books are paginated in pages of (\d+) books per page$/) do |total, per_page|
-  expect(page).to have_content(@book.price_cents, count: 25)
+  expect(page).to have_content("Ian", count: 25)
 end
 
 Given(/^some books have been ordered$/) do
-  pending # express the regexp above with the code you wish you had
+  @books = Book.all 
+  @found = @books.select {|b| b.times_purchased != 0}
+  expect(@found.count).to_not eq(0)
+  # puts @books.select {|b| b.times_purchased == 1000}
 end
 
-When(/^I sort by "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I click "(.*?)" button$/) do |btn|
+  click_button btn
 end
 
 Then(/^the books are re\-sorted based on the amount of times they are purchased$/) do
