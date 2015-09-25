@@ -25,43 +25,60 @@ Then(/^I see the admin panel$/) do
 end
 
 Given(/^I do not have an admin account$/) do
-  pending # express the regexp above with the code you wish you had
+  AdminUser.delete_all
 end
 
 Then(/^I see a flash notification that tell me that my email does not exist in the system$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content("Invalid email or password")
 end
 
 Given(/^I am logged into the admin panel$/) do
-  pending # express the regexp above with the code you wish you had
+  @admin = AdminUser.create(email: "admin@example.com", password: "password", 
+    password_confirmation: "password")
+    visit("/admin")
+    fill_in "Email*", with: "admin@example.com"
+    fill_in "Password*", with: "password"
+    click_button("Login")
 end
 
 When(/^I visit the admin books url$/) do
-  pending # express the regexp above with the code you wish you had
+  visit("/admin/books")
 end
 
-When(/^I enter the title "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I want to add a book$/) do
+  visit("/admin/books/new")
 end
 
-When(/^I enter the price "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I enter the title "(.*?)"$/) do |title|
+  fill_in "Title", with: title
 end
 
-When(/^I enter the published date "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I enter the price "(.*?)"$/) do |price|
+  fill_in "Price cents", with: price
 end
 
-When(/^I enter the author "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I select year "(.*?)"$/) do |year|
+  select year, from: "Year"
 end
 
-Then(/^I see the book "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I select month "(.*?)"$/) do |month|
+  select month, from: "Month"
+end
+
+When(/^I select day "(.*?)"$/) do |day|
+  select day, from: "Day"
+end
+
+When(/^I enter the author "(.*?)"$/) do |author|
+  fill_in "Author", with: author
+end
+
+Then(/^I see the book "(.*?)"$/) do |title|
+  expect(page).to have_content(title)
 end
 
 When(/^I visit the public book index$/) do
-  pending # express the regexp above with the code you wish you had
+  visit("/")
 end
 
 Then(/^I see the book published date "(.*?)"$/) do |arg1|

@@ -19,12 +19,15 @@ Feature: Bookstore Administration Panel
     Given I am logged into the admin panel
     And I am logged into the site
     When I visit the admin books url
-    And I click "Add a Book"
+    And I want to add a book
+    Then I should see "New Book"
     And I enter the title "Test Book"
     And I enter the price "135.99"
-    And I enter the published date "2015-08-10"
+    And I select year "2015"
+    And I select month "February"
+    And I select day "10"
     And I enter the author "Some Person"
-    And I click "Submit"
+    And I click the "Create Book" button
     And I visit the admin books url
     Then I see the book "Test Book"
     When I visit the public book index
