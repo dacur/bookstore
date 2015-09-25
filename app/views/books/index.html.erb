@@ -1,0 +1,29 @@
+<h1>Bookstore</h1>
+<p>
+  <%= form_tag(root_path, method: :get) do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag "Search" %>
+  <% end %>
+</p>
+<%= link_to "Sort by Most Popular", root_path(:sort => "by_times_purchased") %></p>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Published Date</th>
+      <th>Price</th>
+      <th>Number Purchased</th>
+    </tr>
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= book.published_date %></td>
+      <td><%= book.price_cents %></td>
+      <td><%= book.times_purchased %></td>
+    </tr>
+    <% end %>
+</table>
+
+<%= will_paginate @books %>

@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'stripe'
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
+gem 'will_paginate', '~> 3.0.5'
 
 group :development, :test do
   gem 'pry-byebug'
