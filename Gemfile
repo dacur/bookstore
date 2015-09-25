@@ -25,6 +25,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'faker'
   gem 'email_spec'
+  gem 'selenium-webdriver'
 end
 
 gem 'capybara-screenshot', :group => :test
