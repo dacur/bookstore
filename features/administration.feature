@@ -54,10 +54,10 @@ Feature: Bookstore Administration Panel
     And there is a book named "Book To Be Edited" 
     And the price of the book is "$135.99"
     When I visit the admin books url
-    And I click "Edit" for the book "Book To Be Edited"
+    And I edit the book with the title "Book To Be Edited"
     And I change the book name to "Book That Has Been Edited"
     And I change the book price to "222.22"
-    And I click "Submit"
+    And I click the "Update Book" button
     And I visit the admin books url
     Then I see the book "Book That Has Been Edited"
     When I visit the public book index

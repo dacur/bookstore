@@ -93,8 +93,8 @@ Given(/^there is a book named "(.*?)"$/) do |title|
   create(:book, title: title)
 end
 
-Given(/^the price of the book is "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given(/^the price of the book is "(.*?)"$/) do |price|
+  @book.price_cents = price
 end
 
 When(/^I delete the Book with the Title "(.*?)"$/) do |title|
@@ -113,14 +113,18 @@ Then(/^I don't see "(.*?)"$/) do |title|
   expect(page).to_not have_content(title)
 end
 
+When(/^I edit the book with the title "(.*?)"$/) do |title|
+  find('tr', text: title).click_link("Edit")
+end
+
 Given(/^there is a book named "(.*?)" valued at "(.*?)"$/) do |arg1, arg2|
   pending # express the regexp above with the code you wish you had
 end
 
-When(/^I change the book name to "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I change the book name to "(.*?)"$/) do |title|
+  fill_in "Title", with: title
 end
 
-When(/^I change the book price to "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I change the book price to "(.*?)"$/) do |price|
+  fill_in "Price cents", with: price
 end
