@@ -1,25 +1,27 @@
 Given(/^I have an admin account$/) do
-  pending # express the regexp above with the code you wish you had
+  @admin = AdminUser.create(email: "admin@example.com", password: "password", 
+    password_confirmation: "password")
+  # byebug
 end
 
 When(/^I visit the admin panel url$/) do
-  pending # express the regexp above with the code you wish you had
+  visit("/admin/login")
 end
 
 When(/^I enter my admin email$/) do
-  pending # express the regexp above with the code you wish you had
+  fill_in "Email*", with: "admin@example.com"
 end
 
 When(/^I enter my admin password$/) do
-  pending # express the regexp above with the code you wish you had
+  fill_in "Password*", with: "password"
 end
 
 When(/^I click submit$/) do
-  pending # express the regexp above with the code you wish you had
+  click_button("Login")
 end
 
 Then(/^I see the admin panel$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content("Dashboard")
 end
 
 Given(/^I do not have an admin account$/) do
