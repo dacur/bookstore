@@ -10,7 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'stripe'
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '1.0.0.pre2'
 gem 'devise'
 gem 'will_paginate', '~> 3.0.5'
 
