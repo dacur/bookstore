@@ -89,24 +89,28 @@ Then(/^I see the book author "(.*?)"$/) do |author|
   expect(page).to have_content(author)
 end
 
-Given(/^there is a book named "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given(/^there is a book named "(.*?)"$/) do |title|
+  create(:book, title: title)
 end
 
 Given(/^the price of the book is "(.*?)"$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
+When(/^I delete the Book with the Title "(.*?)"$/) do |title|
+  find('tr', text: title).click_link("Delete")
+end
+
 Then(/^I see a prompt requesting that I confirm my decision to delete the book$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page.driver.browser.switch_to.alert.text).to have_content("Are you sure you want to delete this?")
 end
 
 When(/^I confirm my decision to delete the book$/) do
-  pending # express the regexp above with the code you wish you had
+  page.driver.browser.switch_to.alert.accept
 end
 
-Then(/^I don't see "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I don't see "(.*?)"$/) do |title|
+  expect(page).to_not have_content(title)
 end
 
 Given(/^there is a book named "(.*?)" valued at "(.*?)"$/) do |arg1, arg2|
