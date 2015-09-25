@@ -81,12 +81,12 @@ When(/^I visit the public book index$/) do
   visit("/")
 end
 
-Then(/^I see the book published date "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I see the book published date "(.*?)"$/) do |date|
+  expect(page).to have_content(date)
 end
 
-Then(/^I see the book author "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I see the book author "(.*?)"$/) do |author|
+  expect(page).to have_content(author)
 end
 
 Given(/^there is a book named "(.*?)"$/) do |arg1|
