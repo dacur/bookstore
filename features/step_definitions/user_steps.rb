@@ -1,5 +1,5 @@
 Given(/^I do not have an account on the site$/) do
-  @user = build(:user)
+  User.delete_all
 end
 
 When(/^I visit the site root path$/) do
@@ -8,11 +8,6 @@ end
 
 Then(/^I am presented with a login page$/) do
   expect(page).to have_content("Log in")
-end
-
-When(/^I click "(.*?)"$/) do |target|
-  click_on(target)
-  expect(page).to have_content(target)
 end
 
 When(/^I enter my email address$/) do
@@ -24,8 +19,8 @@ When(/^I enter a password with correct confirmation$/) do
   fill_in "Password confirmation", :with => "password"
 end
 
-When(/^I click the "(.*?)" button$/) do |btn|
-  click_button btn
+When(/^I click "(.*?)"$/) do |lnk|
+  click_link(lnk)
 end
 
 Then(/^I am told to sign in or sign up before continuing$/) do
@@ -39,17 +34,9 @@ Then(/^I am sent a confirmation email$/) do
   expect(email.body).to have_content("confirm your account")
 end
 
-When(/^I follow the link "(.*?)" in the email$/) do |link|
-  open_email("test@example.com")
-  visit_in_email(link)
-end
-
-Then(/^my email address becomes confirmed$/) do
-  expect(User.last.confirmed?).to be_truthy
-end
-
-Then(/^I should see "(.*?)"$/) do |text|
-  expect(page).to have_content(text)
+When(/^I visit the link in that email$/) do
+  open_last_email_for("test@example.com")
+  visit_in_email("Confirm my account")
 end
 
 When(/^I enter a password with incorrect confirmation$/) do
@@ -67,4 +54,8 @@ end
 
 Then(/^I am notified that my email address is invalid\.$/) do
   expect(page).to have_content("Email is invalid")
+end
+
+Then(/^My email address becomes confirmed$/) do
+  expect(User.first.confirmed_at).to_not be_nil
 end

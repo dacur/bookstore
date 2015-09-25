@@ -7,6 +7,8 @@
 require 'cucumber/rails'
 require 'factory_girl_rails'
 require 'email_spec/cucumber'
+require 'email_spec' # add this line if you use spork
+require 'email_spec/cucumber'
 
 World(FactoryGirl::Syntax::Methods)
 

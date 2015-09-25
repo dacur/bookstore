@@ -7,10 +7,6 @@ class Book < ActiveRecord::Base
   end
 
   def self.search(search)
-    if search
-      Book.where("title LIKE ?", "%#{search}%")
-    else
-      Book.all
-    end
+    Book.where("title LIKE ?", "%#{search}%")
   end
 end

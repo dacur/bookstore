@@ -9,9 +9,8 @@ Feature: User Account Creation
     And I click the "Sign up" button
     Then I am told to sign in or sign up before continuing
     And I am sent a confirmation email
-    When I follow the link "Confirm my account" in the email
-    Then I should see "Your email address has been successfully confirmed"
-    And my email address becomes confirmed
+    When I visit the link in that email
+    Then My email address becomes confirmed
 
   Scenario: Invalid Password
     Given I do not have an account on the site

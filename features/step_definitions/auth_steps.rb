@@ -1,9 +1,27 @@
+Before do
+  visit("/users/sign_up")
+  fill_in "Email", :with => "test@example.com"
+  fill_in "Password", :with => "password"
+  fill_in "Password confirmation", :with => "password"
+  click_button("Sign up")
+  open_email("test@example.com")
+  visit_in_email("Confirm my account")
+end
+
 Given(/^I have an account on the site$/) do
-  @user = User.last
+
 end
 
 Given(/^My account is confirmed$/) do
-  @user = User.where("confirmed_at", true).last
+  @user = User.where.not(confirmed_at: nil).last
+end
+
+When(/^I visit the root url$/) do
+  visit("/")
+end
+
+Then(/^I should see "(.*?)"$/) do |text|
+  expect(page).to have_content(text)
 end
 
 When(/^I enter my correct email$/) do
