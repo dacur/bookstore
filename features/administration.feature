@@ -12,20 +12,17 @@ Feature: Bookstore Administration Panel
     When I visit the admin panel url
     And I enter my admin email
     And I enter my admin password
-    And I click submit
+    And I click the "Login" button
     Then I see a flash notification that tell me that my email does not exist in the system
 
   Scenario: Adding a book
     Given I am logged into the admin panel
     And I am logged into the site
-    When I visit the admin books url
-    And I want to add a book
+    When I visit the admin new books url    
     Then I should see "New Book"
     And I enter the title "Test Book"
     And I enter the price "135.99"
-    And I select year "2016"
-    And I select month "February"
-    And I select day "10"
+    And I select the date "10 February 2016"
     And I enter the author "Some Person"
     And I click the "Create Book" button
     And I visit the admin books url

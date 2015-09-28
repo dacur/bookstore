@@ -16,10 +16,6 @@ When(/^I enter my admin password$/) do
   fill_in "Password*", with: "password"
 end
 
-When(/^I click submit$/) do
-  click_button("Login")
-end
-
 Then(/^I see the admin panel$/) do
   expect(page).to have_content("Dashboard")
 end
@@ -29,15 +25,15 @@ Given(/^I do not have an admin account$/) do
 end
 
 Then(/^I see a flash notification that tell me that my email does not exist in the system$/) do
-  expect(page).to have_content("Invalid email or password")
+  expect(find(".flash_alert")).to have_content("Invalid email or password")
 end
 
 Given(/^I am logged into the admin panel$/) do
   @admin = AdminUser.create(email: "admin@example.com", password: "password", 
     password_confirmation: "password")
     visit("/admin")
-    fill_in "Email*", with: "admin@example.com"
-    fill_in "Password*", with: "password"
+    fill_in "Email", with: "admin@example.com"
+    fill_in "Password", with: "password"
     click_button("Login")
 end
 
@@ -45,8 +41,15 @@ When(/^I visit the admin books url$/) do
   visit("/admin/books")
 end
 
-When(/^I want to add a book$/) do
+When(/^I visit the admin new books url$/) do
   visit("/admin/books/new")
+end
+
+Then(/^I select the date "(.*?)"$/) do |date|
+  date = date.split(" ")
+  select date[0], from: "Day"
+  select date[1], from: "Month"
+  select date[2], from: "Year"
 end
 
 When(/^I enter the title "(.*?)"$/) do |title|
@@ -54,19 +57,7 @@ When(/^I enter the title "(.*?)"$/) do |title|
 end
 
 When(/^I enter the price "(.*?)"$/) do |price|
-  fill_in "Price cents", with: price
-end
-
-When(/^I select year "(.*?)"$/) do |year|
-  select year, from: "Year"
-end
-
-When(/^I select month "(.*?)"$/) do |month|
-  select month, from: "Month"
-end
-
-When(/^I select day "(.*?)"$/) do |day|
-  select day, from: "Day"
+  fill_in "Price cents", with: price * 100
 end
 
 When(/^I enter the author "(.*?)"$/) do |author|
@@ -115,10 +106,6 @@ end
 
 When(/^I edit the book with the title "(.*?)"$/) do |title|
   find('tr', text: title).click_link("Edit")
-end
-
-Given(/^there is a book named "(.*?)" valued at "(.*?)"$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
 end
 
 When(/^I change the book name to "(.*?)"$/) do |title|
