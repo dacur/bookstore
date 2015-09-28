@@ -10,7 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'stripe'
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '1.0.0.pre2'
 gem 'devise'
 gem 'will_paginate', '~> 3.0.5'
 
@@ -25,6 +25,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'faker'
   gem 'email_spec'
+  gem 'selenium-webdriver'
 end
 
 gem 'capybara-screenshot', :group => :test

@@ -12,3 +12,6 @@ purchased = [0,1,2,3,4,5,6,7]
 100.times { Book.create({title: "Hello World", author: "Ian Donovan", 
   published_date: dates.sample, price_cents: price.sample, 
   price_currency: "USD", times_purchased: purchased.sample})}
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
