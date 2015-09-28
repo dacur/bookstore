@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
+  root "books#index"
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root "books#index"
   devise_for :users
+  
+  resources :books, only: [:show]
 
 end

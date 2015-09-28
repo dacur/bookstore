@@ -3,7 +3,7 @@ Given(/^there are some books in the database$/) do
 end
 
 When(/^I click on a book$/) do
-  pending # express the regexp above with the code you wish you had
+  first(".book-row").click_link("Title")
 end
 
 Then(/^the book is added to my cart$/) do
