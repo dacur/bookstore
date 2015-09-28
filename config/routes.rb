@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :books, only: [:show]
+  resources :line_items
+  post "/line_items/add_to_cart"
 
 end

@@ -1,4 +1,9 @@
 <h2><%= @book.title %></h2>
 <p>Author: <%= @book.author %></p>
-<p><%= link_to 'Add to Cart'%></p>
+<div style="width:10%">
+  <%= form_for LineItem.new, url: line_items_add_to_cart_path, method: :post do |f| %>
+    <%= f.text_field :quantity %>
+    <%= f.submit "Add to Cart" %>
+  <% end %>
+</div>
 <p><%= link_to 'Back', root_path %></p>
