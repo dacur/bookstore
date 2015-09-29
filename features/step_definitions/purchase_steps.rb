@@ -7,7 +7,7 @@ When(/^I click on a book$/) do
 end
 
 Then(/^the book is added to my cart$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(LineItem.count).to change(1)
 end
 
 When(/^I visit my cart$/) do

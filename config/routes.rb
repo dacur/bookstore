@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :books, only: [:show]
   resources :line_items
   post "/line_items/add_to_cart"
+  get "/cart", to: "line_items#show"
 
 end
