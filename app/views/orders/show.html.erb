@@ -1,0 +1,6 @@
+<h1>Cart</h1>
+<% @order.line_items.each do |line_item| %>
+  <%= line_item.id %>
+<% end %>
+<h3>Complete your order</h3>
+<%= link_to "Purchase", payment_path %>

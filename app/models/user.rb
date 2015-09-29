@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   has_many :orders
 
   def cart
-    orders.where(completed: false).first_or_initialize
+    orders.where(completed: false).first_or_create
   end
 end

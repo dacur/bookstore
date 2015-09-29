@@ -7,15 +7,15 @@ When(/^I click on a book$/) do
 end
 
 Then(/^the book is added to my cart$/) do
-  expect(LineItem.count).to change(1)
+  expect(page).to have_content(LineItem.last.book_id)
 end
 
 When(/^I visit my cart$/) do
-  pending # express the regexp above with the code you wish you had
+  visit('/cart')
 end
 
 Then(/^I see the book in my cart$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content(LineItem.last.book_id)
 end
 
 Then(/^I am asked for my shipping address$/) do

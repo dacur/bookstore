@@ -9,10 +9,11 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'stripe'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'activeadmin', '1.0.0.pre2'
 gem 'devise'
 gem 'will_paginate', '~> 3.0.5'
+gem 'money'
 
 group :development, :test do
   gem 'pry-byebug'
