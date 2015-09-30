@@ -1,36 +1,42 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:payment, :submit_payment, :show]
-
+  before_action :set_order, only: [:payment, :submit_payment, :show, :edit, :index]
+  
   def show
+  end
+
+  def create
   end
 
   def payment
   end
 
   def submit_payment
-    # Amount in cents
-    customer = Stripe::Customer.create(
-      :email => 'example@stripe.com',
-      :card  => params[:stripeToken]
-    )
+  if @order.user.stripe_customer_token.nil?
+      @order.user.stripe_card_token = params[:user][:stripe_card_token]
+      @order.user.save_card
+    end
+    @order.user.update(user_params)
+    render :confirmation
+  end
 
-    charge = Stripe::Charge.create(
-      :customer    => customer.id,
-      :amount      => amount,
-      :description => 'Rails Stripe customer',
-      :currency    => 'usd'
-    )
-
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to charges_path
+  def confirm_order
+    if @order.charge_card
+      # OrderMailer.order_invoice(current_user,@order).deliver_now
+      redirect_to @order, notice: "Your order has been placed!"
+    else
+      redirect_to @order, alert: "There was an error with placing your order: #{@order.errors.full_messages.to_sentence}"
+    end
   end
 
   private
 
   def set_order
     @order = current_user.cart
+  end
+
+  def user_params
+    params.require(:user).permit(:billing_address, :shipping_address)
   end
 
   def amount

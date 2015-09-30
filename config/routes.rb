@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :orders, except: [:new] do
     member do 
       post 'submit_payment'
+      post 'confirm_order'
     end
   end
 

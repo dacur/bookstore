@@ -2,7 +2,7 @@
 <p>Author: <%= @book.author %></p>
 <div style="width:10%">
   <%= form_for LineItem.new, url: line_items_add_to_cart_path, method: :post do |f| %>
-    <%= f.text_field :quantity %>
+    Quantity: <%= f.text_field :quantity %>
     <%= f.hidden_field :book_id, value: @book.id %>
     <%= f.submit "Add to Cart" %>
   <% end %>

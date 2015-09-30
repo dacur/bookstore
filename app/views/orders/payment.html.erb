@@ -1,13 +1,40 @@
-<%= form_tag orders_path do %>
-  <article>
-    <label class="amount">
-      <span>Amount: $<%=current_user.cart.total_cents%></span>
-    </label>
-  </article>
+<h1>Payment</h1>
+<%= form_for @order.user, :url => submit_payment_order_path(@order), :method => :post do |f| %>
+  <div class="field">
+    <%= f.label :billing_address, "Billing Address" %>
+    <%= f.text_field :billing_address %>
+  </div>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A book order"
-          data-amount=@order.total
-          data-locale="auto"></script>
+  <%= f.hidden_field :stripe_customer_token %>
+
+  <div class="field">
+    <%= f.label :shipping_address, "Shipping Address" %>
+    <%= f.text_field :shipping_address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <% if @order.user.stripe_customer_token.present? %>
+    Credit card has been provided.
+  <% else %>
+    <div class="field">
+      <%= label_tag :card_number, "Credit Card Number" %>
+      <%= text_field_tag :card_number, nil, name: nil %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+      <%= text_field_tag :card_code, nil, name: nil %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_month, "Card Expiration" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+    </div>
+  <% end %>
+  <div id="stripe_error">
+    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+  </div>
+  <%= submit_tag "Submit Order" %>
 <% end %>

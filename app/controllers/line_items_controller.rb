@@ -3,7 +3,8 @@ class LineItemsController < ApplicationController
 
   def add_to_cart
     order = current_user.cart
-    LineItem.create(line_item_params.merge!(order_id: order.id))
+    quantity = params[:quantity] || 1
+    LineItem.create(line_item_params.merge!(order_id: order.id, quantity: quantity))
     @line_items = order.line_items
     redirect_to "/cart"
   end

@@ -16,6 +16,7 @@ end
 
 Then(/^I see the book in my cart$/) do
   expect(page).to have_content(LineItem.last.book_id)
+  # byebug
 end
 
 Then(/^I am asked for my shipping address$/) do
@@ -58,8 +59,9 @@ Then(/^I am emailed an order invoice containing the books details, quantity, sub
   pending # express the regexp above with the code you wish you had
 end
 
-When(/^I enter (\d+) for the quantity$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I enter (\d+) for the quantity$/) do |q|
+  # byebug
+  fill_in "line_item_quantity", :with => q
 end
 
 Then(/^the book is added to my cart with quantity (\d+)$/) do |arg1|
