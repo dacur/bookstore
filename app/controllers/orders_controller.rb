@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:payment, :submit_payment, :show, :edit, :index]
+  before_action :set_order, only: [:payment, :submit_payment, 
+    :show, :edit, :index, :confirm_order]
   
   def show
   end
@@ -21,7 +22,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm_order
-    if @order.charge_card
+    if @order.save_with_payment
       # OrderMailer.order_invoice(current_user,@order).deliver_now
       redirect_to @order, notice: "Your order has been placed!"
     else

@@ -15,7 +15,7 @@ Feature: Purchasing a Book
     When I enter my billing address
     Then I am asked for my credit card
     When I enter my credit card
-    And I click "Submit Order"
+    And I click the "Submit Order" button
     Then I am asked to review the order total
     When I click "Confirm"
     Then I am shown the order summary
@@ -28,7 +28,7 @@ Feature: Purchasing a Book
     When I visit the public book index
     And I click on a book
     And I enter 2 for the quantity
-    And I click "Add to Cart"
+    And I click the "Add to Cart" button
     Then the book is added to my cart with quantity 2
     When I visit my cart
     Then I see the book in my cart with quantity 2

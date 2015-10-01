@@ -10,14 +10,14 @@ class Order < ActiveRecord::Base
   def save_with_payment
     if valid?
       charge = Stripe::Charge.create(
-        :amount => total.cents,
+        :amount => self.total_cents,
         :currency => "usd",
-        :customer => user.stripe_customer_token,
+        :source => user.stripe_customer_token,
         :description => "Book order"
       )
       self.stripe_token = charge.id
       save!
-      # NEED TO CHANGE ORDER COMPLETED TO TRUE
+      # NEED TO CHANGE ORDER.COMPLETED TO TRUE
     end
     rescue Stripe::InvalidRequestError => e
       logger.error "Stripe error while creating customer: #{e.message}"
