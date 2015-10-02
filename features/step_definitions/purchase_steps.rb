@@ -39,7 +39,11 @@ Then(/^I am asked for my credit card$/) do
 end
 
 When(/^I enter my credit card$/) do
-  fill_in "Credit Card Number", :with => "4242424242424242"
+  fill_in "Credit Card Number", :with => 4242424242424242
+  fill_in "Security Code on Card (CVV)", :with => 123
+  select "1 - January", :from => "card_month" 
+  select "2020", :from => "card_year" 
+  # byebug
 end
 
 Then(/^I am asked to review the order total$/) do

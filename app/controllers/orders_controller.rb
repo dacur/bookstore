@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
 
   def submit_payment
   if @order.user.stripe_customer_token.nil?
-      @order.user.stripe_card_token = params[:user][:stripe_card_token]
+      @order.user.stripe_card_token = params[:user][:stripe_customer_token]
       @order.user.save_card
     end
     @order.user.update(user_params)
@@ -23,8 +23,7 @@ class OrdersController < ApplicationController
 
   def confirm_order
     if @order.save_with_payment
-      # OrderMailer.order_invoice(current_user,@order).deliver_now
-      redirect_to @order, notice: "Your order has been placed!"
+      redirect_to @order, notice: "Your order has been placed and will ship soon."
     else
       redirect_to @order, alert: "There was an error with placing your order: #{@order.errors.full_messages.to_sentence}"
     end
@@ -37,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:billing_address, :shipping_address)
+    params.require(:user).permit(:billing_address, :shipping_address, :stripe_customer_token, :email)
   end
 
   def amount

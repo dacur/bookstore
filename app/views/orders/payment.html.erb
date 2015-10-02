@@ -1,5 +1,5 @@
 <h1>Payment</h1>
-<%= form_for @order.user, :url => submit_payment_order_path(@order), :method => :post do |f| %>
+<%= form_for @order.user, :url => submit_payment_order_path(@order), :method => :post, :html => {:id => 'payment_form'} do |f| %>
   <div class="field">
     <%= f.label :billing_address, "Billing Address" %>
     <%= f.text_field :billing_address %>
