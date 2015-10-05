@@ -18,7 +18,6 @@ order =
       cvc: $('#card_code').val()
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
-    console.log(JSON.stringify(card))
     Stripe.createToken(card, order.handleStripeResponse)
   
   handleStripeResponse: (status, response) ->

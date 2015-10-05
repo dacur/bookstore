@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
   end
 
   def submit_payment
-  if @order.user.stripe_customer_token.nil?
+    if @order.user.stripe_customer_token.nil?
       @order.user.stripe_card_token = params[:user][:stripe_customer_token]
       @order.user.save_card
     end
