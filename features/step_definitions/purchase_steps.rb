@@ -43,7 +43,10 @@ When(/^I enter my credit card$/) do
   fill_in "Security Code on Card (CVV)", :with => 123
   select "1 - January", :from => "card_month" 
   select "2020", :from => "card_year" 
-  # byebug
+end
+
+When(/^I click the "(.*?)" link$/) do |lnk|
+  click_link(lnk)
 end
 
 Then(/^I am asked to review the order total$/) do
@@ -55,7 +58,7 @@ Then(/^I am shown the order summary$/) do
 end
 
 Then(/^my credit card is saved for future purchases$/) do
-  expect(User.last).to_not be_nil
+  expect(Order.last.user.stripe_customer_token).to_not be_nil
 end
 
 Then(/^I am emailed an order invoice containing the books details, quantity, subtotal, and order total$/) do
@@ -63,7 +66,6 @@ Then(/^I am emailed an order invoice containing the books details, quantity, sub
 end
 
 When(/^I enter (\d+) for the quantity$/) do |q|
-  # byebug
   fill_in "line_item_quantity", :with => q
 end
 

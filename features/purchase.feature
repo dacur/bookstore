@@ -1,4 +1,5 @@
 Feature: Purchasing a Book
+  @javascript
   Scenario: Happy Path
     Given I am logged into the site
     And there are some books in the database
@@ -17,7 +18,7 @@ Feature: Purchasing a Book
     When I enter my credit card
     And I click the "Submit Order" button
     Then I am asked to review the order total
-    When I click "Confirm"
+    When I click the "Confirm" link
     Then I am shown the order summary
     Then my credit card is saved for future purchases
     And I am emailed an order invoice containing the books details, quantity, subtotal, and order total
