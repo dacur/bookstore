@@ -51,11 +51,11 @@ Then(/^I am asked to review the order total$/) do
 end
 
 Then(/^I am shown the order summary$/) do
-  expect(page).to have_content("Order Confirmation")
+  expect(page).to have_content("Your order has been placed and will ship soon")
 end
 
 Then(/^my credit card is saved for future purchases$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(User.last).to_not be_nil
 end
 
 Then(/^I am emailed an order invoice containing the books details, quantity, subtotal, and order total$/) do

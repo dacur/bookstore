@@ -14,11 +14,11 @@ class OrdersController < ApplicationController
 
   def submit_payment
     if @order.user.stripe_customer_token.nil?
-      @order.user.stripe_card_token = params[:user][:stripe_customer_token]
+      @order.user.stripe_card_token = params[:user][:stripe_card_token]
       @order.user.save_card
     end
     @order.user.update(user_params)
-    render :confirmation
+    render :confirmation # renders Order Confirmation page
   end
 
   def confirm_order
@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:billing_address, :shipping_address, :stripe_customer_token, :email)
+    params.require(:user).permit(:billing_address, :shipping_address, :email)
   end
 
   def amount
