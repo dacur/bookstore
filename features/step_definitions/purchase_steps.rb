@@ -85,13 +85,13 @@ When(/^I adjust the quantity of the book to (\d+)$/) do |q|
 end
 
 Given(/^I have a credit card saved on the site$/) do
-  pending # express the regexp above with the code you wish you had
+  User.last.update({:stripe_customer_token => "cus_77FCvDXsN19zJr"})
 end
 
 Then(/^I am asked if I want to use my already saved credit card$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content("Credit card has been provided")
 end
 
 When(/^I confirm using my saved credit card$/) do
-  pending # express the regexp above with the code you wish you had
+  click_button("Submit Order")
 end
