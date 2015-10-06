@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
 
   def confirm_order
     if @order.save_with_payment
+      OrderMailer.send_invoice(current_user,@order).deliver_now
       redirect_to @order, notice: "Your order has been placed and will ship soon."
     else
       redirect_to @order, alert: "There was an error with placing your order: #{@order.errors.full_messages.to_sentence}"

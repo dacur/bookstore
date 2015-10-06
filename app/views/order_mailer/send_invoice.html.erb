@@ -1,0 +1,28 @@
+<p>Hello!</p>
+
+<p>We are writing to let you know that we received your order number <%= @order.id %>). We will send another email once we have shipped your order. Thank you!</p>
+
+<p>Summary:</p>
+<table id="order-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.line_items.each do |li| %>
+      <tr>
+        <td><%= li.book.title %></td>
+        <td><%= li.book.price_cents %></td>
+        <td><%= li.quantity %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><strong>Total:</strong><%= @order.total_cents %></td>
+      <td></td>
+  </tbody>
+</table>

@@ -62,7 +62,8 @@ Then(/^my credit card is saved for future purchases$/) do
 end
 
 Then(/^I am emailed an order invoice containing the books details, quantity, subtotal, and order total$/) do
-  pending # express the regexp above with the code you wish you had
+  email = open_last_email_for("test@example.com")
+  expect(email).to have_content("we received your order")
 end
 
 When(/^I enter (\d+) for the quantity$/) do |q|
