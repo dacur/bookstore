@@ -2,8 +2,6 @@ class LineItemsController < ApplicationController
   before_action :authenticate_user!
 
   def add_to_cart
-    puts "PARAMS"
-    puts params[:line_item][:quantity]
     order = current_user.cart
     quantity = params[:line_item][:quantity] || 1
     LineItem.create(line_item_params.merge!(order_id: order.id, quantity: quantity))

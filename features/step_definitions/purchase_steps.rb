@@ -71,7 +71,7 @@ When(/^I enter (\d+) for the quantity$/) do |q|
 end
 
 Then(/^the book is added to my cart with quantity (\d+)$/) do |q|
-  expect(LineItem.last.quantity).to eq(q)
+  expect(LineItem.last.quantity).to eq(q.to_i)
 end
 
 Then(/^I see the book in my cart with quantity (\d+)$/) do |arg1|
