@@ -78,8 +78,10 @@ Then(/^I see the book in my cart with quantity (\d+)$/) do |arg1|
   expect(page).to have_content(LineItem.last.quantity)
 end
 
-When(/^I adjust the quantity of the book to (\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I adjust the quantity of the book to (\d+)$/) do |q|
+  visit("/line_items/1")
+  fill_in "line_item_quantity", :with => q
+  click_button("Update Cart")
 end
 
 Given(/^I have a credit card saved on the site$/) do

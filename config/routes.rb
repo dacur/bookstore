@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       post 'confirm_order'
     end
   end
+  resources :line_items, only: [:update, :show]
+
+  # get "/cart/edit", to: "line_items#show"
 
   post "/line_items/add_to_cart"
   get "/cart", to: "orders#show"
