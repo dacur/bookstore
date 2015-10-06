@@ -17,7 +17,6 @@ class Order < ActiveRecord::Base
       )
       self.stripe_token = charge.id
       save!
-      # NEED TO CHANGE ORDER.COMPLETED TO TRUE
     end
     rescue Stripe::InvalidRequestError => e
       logger.error "Stripe error while creating customer: #{e.message}"

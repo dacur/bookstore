@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
       @order.user.save_card
     end
     @order.user.update(user_params)
-    render :confirmation # renders Order Confirmation page
+    render :confirmation
   end
 
   def confirm_order
