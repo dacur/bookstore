@@ -3,6 +3,7 @@
   <% @order.line_items.each do |line_item| %>
     <%= line_item.book.title %>
     <%= line_item.book.price_cents %>
+    <%= line_item.quantity %>
   </br>
   <% end %>
 </div>

@@ -75,7 +75,7 @@ Then(/^the book is added to my cart with quantity (\d+)$/) do |q|
 end
 
 Then(/^I see the book in my cart with quantity (\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content(LineItem.last.quantity)
 end
 
 When(/^I adjust the quantity of the book to (\d+)$/) do |arg1|

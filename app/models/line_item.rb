@@ -1,4 +1,6 @@
 class LineItem < ActiveRecord::Base
+  validates :quantity, :book, presence: true
+
   belongs_to :book
   belongs_to :order
 
