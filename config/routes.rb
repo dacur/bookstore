@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       post 'confirm_order'
     end
   end
-  resources :line_items, only: [:update, :show]
+  resources :line_items, only: [:update, :show, :edit]
 
   # get "/cart/edit", to: "line_items#show"
 

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   attr_accessor :stripe_card_token
 
   def cart
-    orders.where(completed: false).first_or_create
+    orders.where(stripe_token: nil).first_or_create
   end
 
   def save_card

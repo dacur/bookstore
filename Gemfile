@@ -12,7 +12,7 @@ gem 'stripe'
 gem 'activeadmin', '1.0.0.pre2'
 gem 'devise'
 gem 'will_paginate', '~> 3.0.5'
-gem 'money'
+gem 'money-rails'
 
 group :development, :test do
   gem 'pry-byebug'

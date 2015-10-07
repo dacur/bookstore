@@ -1,12 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:payment, :submit_payment, 
-    :show, :edit, :index, :confirm_order]
+    :show, :confirm_order]
   
   def show
-  end
-
-  def create
   end
 
   def payment
@@ -38,12 +35,6 @@ class OrdersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:billing_address, :shipping_address, :email)
-  end
-
-  def amount
-    @line_items = LineItem.where(order_id: current_user.cart.order)
-    @line_items.each { |line_item| @amount += line_item.price }
-    @amount
   end
   
 end

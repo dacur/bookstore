@@ -79,7 +79,7 @@ Then(/^I see the book in my cart with quantity (\d+)$/) do |arg1|
 end
 
 When(/^I adjust the quantity of the book to (\d+)$/) do |q|
-  visit("/line_items/1")
+  visit("/line_items/1/edit")
   fill_in "line_item_quantity", :with => q
   click_button("Update Cart")
 end
