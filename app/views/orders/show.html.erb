@@ -1,0 +1,13 @@
+<h1>Order Summary</h1>
+<div>
+  <% @order.line_items.each do |line_item| %>
+    <%= line_item.book.title %>
+    <%= line_item.book.price_cents %>
+    <%= line_item.quantity %>
+    <%= link_to "Edit", edit_line_item_path(line_item) %> 
+  </br>
+  <% end %>
+</div>
+</br>
+<h3>Complete your order</h3>
+<%= link_to "Purchase", payment_path %>

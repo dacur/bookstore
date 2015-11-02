@@ -1,0 +1,10 @@
+<h2><%= @line_item.book.title %></h2>
+<p>Author: <%= @line_item.book.author %></p>
+<div style="width:10%">
+  <%= form_for @line_item, url: line_item_path, method: :patch do |f| %>
+    Quantity: <%= f.text_field :quantity, value: @line_item.quantity %>
+    <%= f.hidden_field :book_id, value: @line_item.book.id %>
+    <%= f.submit "Update Cart" %>
+  <% end %>
+</div>
+<p><%= link_to 'Back', :back %></p>

@@ -1,0 +1,10 @@
+<h2><%= @book.title %></h2>
+<p>Author: <%= @book.author %></p>
+<div style="width:10%">
+  <%= form_for LineItem.new, url: line_items_add_to_cart_path, method: :post do |f| %>
+    Quantity: <%= f.text_field :quantity, value: 1 %>
+    <%= f.hidden_field :book_id, value: @book.id %>
+    <%= f.submit "Add to Cart" %>
+  <% end %>
+</div>
+<p><%= link_to 'Back', :back %></p>

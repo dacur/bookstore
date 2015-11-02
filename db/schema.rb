@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925143502) do
+ActiveRecord::Schema.define(version: 20150930183500) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -57,6 +57,22 @@ ActiveRecord::Schema.define(version: 20150925143502) do
     t.integer  "times_purchased"
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "quantity"
+    t.integer  "order_id"
+    t.integer  "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "stripe_token"
+    t.boolean  "completed"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "encrypted_password",     default: "", null: false
@@ -75,6 +91,9 @@ ActiveRecord::Schema.define(version: 20150925143502) do
     t.string   "password"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "shipping_address"
+    t.string   "billing_address"
+    t.string   "stripe_customer_token"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
